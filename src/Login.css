@@ -25,7 +25,9 @@
     width: 350px;
     margin-bottom: 25px;
 }
-
+/* .MuiOutlinedInput-root {
+    margin-bottom: 25px;
+} */
 .MuiFormControl-root:focus {
    fill: rgba(29,161,242,1.00);
 }
