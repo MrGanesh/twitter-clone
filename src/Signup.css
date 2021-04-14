@@ -1,4 +1,4 @@
-.login{
+.signup{
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -8,32 +8,30 @@
   margin-top: 30px;
 }
 
-.login > h1 {
+.signup > h1 {
   font-weight: 800;
   margin-bottom: 20px;
 }
 
-.login > .MuiSvgIcon-root {
+.signup > .MuiSvgIcon-root {
     font-size: 3.5rem;
     fill: rgba(29,161,242,1.00);
 }
-.login > .MuiSvgIcon-root {
+.signup > .MuiSvgIcon-root {
     font-size: 3.5rem;
     fill: rgba(29,161,242,1.00);
 }
 
-.login > .MuiFormControl-root {
+.signup > .MuiFormControl-root {
     width: 350px;
     margin-bottom: 20px;
 }
-/* .MuiOutlinedInput-root {
-    margin-bottom: 25px;
-} */
+
 .MuiFormControl-root:focus {
    fill: rgba(29,161,242,1.00);
 }
 
-.login > .MuiButton-contained {
+.signup > .MuiButton-contained {
     color: white;
     box-shadow: rgba(29,161,242,1.00);
     background-color: rgba(29,161,242,1.00);
@@ -44,7 +42,8 @@
     margin-bottom: 20px;
 }
 
-.login > a {
+.signup > a {
   color: rgba(29,161,242,1.00);
   text-decoration: none;
 }
+
