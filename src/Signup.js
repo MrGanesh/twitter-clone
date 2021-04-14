@@ -14,7 +14,9 @@ function Signup() {
   return( 
 
     <div className='signup'>
+   <Link to="/">
     <TwitterIcon />
+    </Link>
     <h1> Create your account </h1>
       <TextField id="outlined-basic" label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} />
       <TextField id="outlined-basic" label="Email" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)}/>

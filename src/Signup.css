@@ -13,14 +13,11 @@
   margin-bottom: 20px;
 }
 
-.signup > .MuiSvgIcon-root {
+.signup > a > .MuiSvgIcon-root {
     font-size: 3.5rem;
     fill: rgba(29,161,242,1.00);
 }
-.signup > .MuiSvgIcon-root {
-    font-size: 3.5rem;
-    fill: rgba(29,161,242,1.00);
-}
+]
 
 .signup > .MuiFormControl-root {
     width: 350px;
@@ -40,6 +37,12 @@
     border-radius: 50px;
     padding: 15px;
     margin-bottom: 20px;
+}
+.signup > .MuiButton-contained:hover {
+    color: white;
+    box-shadow: rgba(29,161,242,1.00);
+    background-color: rgba(29,161,242,1.00);
+   
 }
 
 .signup > a {

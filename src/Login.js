@@ -14,7 +14,9 @@ function Login() {
   return( 
 
     <div className='login'>
+    <Link to="/">
     <TwitterIcon />
+    </Link>
     <h1> Login to Twitter </h1>
       <TextField id="outlined-basic" label="Phone, email or username" variant="outlined" value={email} onChange={(e) => setEmail(e.target.value)}/>
       <TextField id="outlined-basic" type="password" label="Password" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />
