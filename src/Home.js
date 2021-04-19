@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./Home.css";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -9,6 +9,8 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 
 function Home() {
+  const [textBody, setTextBody] = useState()
+  const [image, setImage] = useState()
   return (
     <div className="home">
       <div className="postSection">
@@ -22,7 +24,8 @@ function Home() {
             />
           </div>
           <div style={{ width: "100%" }}>
-            <TextField id="standard-basic" label="What's happening" />
+            <TextField id="standard-basic" value={textBody} onChange={(e)=> setTextBody(e.target.value)}  label="What's happening?" />
+            <TextField id="standard-basic" type="file" value={image} onChange={(e)=>setImage(e.target.files[0])} />
             <div className="submitButton">
               <Button variant="contained" className="subButton">
                 Submit

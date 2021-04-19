@@ -93,3 +93,9 @@ display: flex;
     fill: rgba(29,161,242,1.00);
     color: rgba(29,161,242,1.00);
 }
+
+.MuiInputBase-root{
+    color: white;
+    box-shadow:none;
+    background-color: rgba(29,161,242,1.00);
+}
