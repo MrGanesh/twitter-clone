@@ -17,7 +17,7 @@ function Home() {
                 <div > 
                     <img className="imgSection"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2l_gilSBHxWe8fCq98Oiw83hqHwhtgY1w17tDde3QWisyvJI&s" />
                 </div>
-                <div>
+                <div style={{width:'100%'}}>
                 <TextField id="standard-basic"  label="What's happening" />
                   <div className="submitButton">
                    <Button variant="contained" className="subButton">

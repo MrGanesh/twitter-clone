@@ -1,14 +1,15 @@
 .home{
   margin-right: auto;
   margin-left: auto;
-  width: 500px;
+ flex: 0.5;
+ width: 250px;
   background-color: #e5e5e5;
 }
 
 .postSection{
   background-color: #fff;
   border: 1px solid #e5e5e5;
-  margin-top: 20px;
+  padding-top: 25px;
 }
 
 .post{
@@ -23,8 +24,9 @@
   border-bottom:1px solid #e5e5e5;;
 }
 .postSection.textSection.MuiFormControl-root.label#standard-basic-label {
-    padding:0px 10px 0px 10px;
+    padding:10px 10px 10px 10px;
     margin: 10px;
+    min-width: 90%;
 }
 
 .textSection{
@@ -50,6 +52,7 @@
     left: auto;
     right: 0;
     text-transform: none;
+    width: 100px;
 }
 
 .MuiButton-contained:hover {
@@ -87,6 +90,6 @@ display: flex;
 }
 
 .MuiSvgIcon-root {
-    fill: rgba(29,161,242,1.00);;
+    fill: rgba(29,161,242,1.00);
     color: rgba(29,161,242,1.00);
 }
