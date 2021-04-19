@@ -10,9 +10,11 @@ import RightBar from "./RightBar"
 import {useDataLayerValue} from './DataLayer'
 export default function App() {
   const [{user}, dispatch] = useDataLayerValue();
+
+  const userAvailable = JSON.parse(localStorage.getItem('user'))
   return (
     <>
-      {!user ? (
+      {!userAvailable ? (
         <div>
           <Router>
             <Switch>
