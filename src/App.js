@@ -11,7 +11,7 @@ export default function App() {
   const [user, setUser] = useState(true);
   return (
     <>
-      {!user ? (
+      {user ? (
         <div>
           <Router>
             <Switch>
