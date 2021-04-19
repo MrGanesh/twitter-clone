@@ -7,11 +7,12 @@ import Signup from "./Signup";
 import Home from "./Home";
 import Sidebar from "./Sidebar";
 import RightBar from "./RightBar"
+import {useDataLayerValue} from './DataLayer'
 export default function App() {
-  const [user, setUser] = useState(true);
+  const [{user}, dispatch] = useDataLayerValue();
   return (
     <>
-      {user ? (
+      {!user ? (
         <div>
           <Router>
             <Switch>
@@ -33,7 +34,7 @@ export default function App() {
             <Sidebar />
 
             <Switch>
-              <Route exact path="/home">
+              <Route exact path="/">
                 <Home />
               
               </Route>

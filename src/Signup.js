@@ -6,7 +6,7 @@ import "./Signup.css";
 import { Link, useHistory } from "react-router-dom";
 
 function Signup() {
-  const history = useHistory
+  const history = useHistory()
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pic, setPic] = useState();
