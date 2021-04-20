@@ -4,7 +4,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import Button from '@material-ui/core/Button';
 import './Login.css'
 import {Link, useHistory} from 'react-router-dom'
-
+import {useDataLayerValue} from './DataLayer'
 
 function Login() {
   const history = useHistory()
@@ -13,6 +13,7 @@ function Login() {
   const [phone, setPhone] = useState()
   const [password, setPassword] = useState('')
   const userData = JSON.parse(localStorage.getItem('user'))
+  const [{user}, dispatch] = useDataLayerValue()
  
     const signin = e => {
     fetch("http://localhost:5000/signin", {

@@ -9,6 +9,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import { useDataLayerValue } from "./DataLayer";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import ModeCommentIcon from '@material-ui/icons/ModeComment';
 
 function Home() {
   const [textBody, setTextBody] = useState();
@@ -106,6 +107,42 @@ function Home() {
       });
   };
 
+  // const makeComment = (text, postID) => {
+  //    fetch("http://localhost:5000/comment",{
+  //      method:"put",
+  //       headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + localStorage.getItem("token")
+  //     },
+  //     body:JSON.stringify({
+  //       postID,
+  //       text
+  //     })
+  //    }).then(res=> res.json())
+  //    .then(data=> {
+  //      console.log('data in comment',data)
+  //    })
+  // }
+
+const makeComment = (text,postID) => {
+        fetch('http://localhost:5000/comment',{
+            method:'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                postID,
+                text,
+            })
+        }).then(res => res.json())
+        .then(result => {
+            console.log(result)
+          
+        }).catch(err =>console.log(err));
+        // })
+    }
+
   return (
     <div className="home">
       <div className="postSection">
@@ -161,23 +198,30 @@ function Home() {
                   <img width="100px" height="100px" src={item.pic} />
                 </div>
               )}
-
               <div className="actionIcons">
+               {item.comments.includes(user._id) ? (
                 <IconButton>
-                  <ModeCommentOutlinedIcon />
+                  <ModeCommentIcon /> {item.comments.length} 
                 </IconButton>
+               ) : (
+                <IconButton>
+                  <ModeCommentOutlinedIcon /> {item.comments.length} 
+                </IconButton>
+               )
+            }
+               
+               
                 <IconButton>
                   <RepeatIcon />
                 </IconButton>
-                {console.log(item.likes)}
-                {console.log(user._id)}
+              
                 {item.likes.includes(user._id) ? (
                   <IconButton onClick={() => unlikePost(item._id)}>
-                    <FavoriteIcon />
+                    <FavoriteIcon /> {item.likes.length} 
                   </IconButton>
                 ) : (
                   <IconButton onClick={() => likePost(item._id)}>
-                    <FavoriteBorderOutlinedIcon />
+                    <FavoriteBorderOutlinedIcon /> {item.likes.length} 
                   </IconButton>
                 )}
 
@@ -185,6 +229,26 @@ function Home() {
                   <CloudDownloadIcon />
                 </IconButton>
               </div>
+
+              {
+                item.comments.map(record=> {
+                  return(
+                    <h6 key={item._id}><span><strong>{record.postedBy.name}</strong></span> : {record.text} </h6>
+                  )
+                })
+              }
+              <form onSubmit={(e) => {
+                                e.preventDefault();
+                               
+                                makeComment(e.target[0].value, item._id)
+                             
+                            }}>
+                    <TextField
+                    id="standard-basic"
+          
+                    label="add comment"
+                  />
+              </form>
             </div>
           </div>
         ))}
