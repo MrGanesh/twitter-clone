@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState,useEffect } from "react";
 import "./Home.css";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -9,8 +9,67 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 
 function Home() {
-  const [textBody, setTextBody] = useState()
-  const [image, setImage] = useState()
+  const [textBody, setTextBody] = useState();
+  const [image, setImage] = useState();
+  const [url, setUrl] = useState();
+  const [data, setData] = useState();
+
+  useEffect(()=> {
+     fetch("http://localhost:5000/allpost", {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token")
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setData(data.posts)
+        });
+  }, [])
+
+
+  useEffect(() => {
+    if (url) {
+      fetch("http://localhost:5000/createpost", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify({
+          body: textBody,
+          pic: url
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data);
+          setTextBody("");
+        });
+    }
+  }, [url]);
+
+  const postDetails = (e) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "insta-clone");
+    data.append(" _name", "saaho-insta");
+    fetch("https://api.cloudinary.com/v1_1/saaho-insta/image/upload", {
+      method: "post",
+      body: data
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log('url', data.url)
+        setUrl(data.url);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="home">
       <div className="postSection">
@@ -24,10 +83,25 @@ function Home() {
             />
           </div>
           <div style={{ width: "100%" }}>
-            <TextField id="standard-basic" value={textBody} onChange={(e)=> setTextBody(e.target.value)}  label="What's happening?" />
-            <TextField id="standard-basic" type="file" value={image} onChange={(e)=>setImage(e.target.files[0])} />
+            <TextField
+              id="standard-basic"
+              value={textBody}
+              onChange={e => setTextBody(e.target.value)}
+              label="What's happening?"
+            />
+            <TextField
+              id="standard-basic"
+              type="file"
+              onChange={e => {
+                setImage(e.target.files[0]);
+              }}
+            />
             <div className="submitButton">
-              <Button variant="contained" className="subButton">
+              <Button
+                variant="contained"
+                className="subButton"
+                onClick={e => postDetails(e)}
+              >
                 Submit
               </Button>
             </div>
@@ -36,25 +110,34 @@ function Home() {
       </div>
 
       <div className="post">
-        <div className="textSection">
+      {
+        data?.map(item => (
+                 <div className="textSection">
           <div>
             <img
               className="imgsSection"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsrooDvPyhvh7TyDfBlXOibVHH24mRHjF4ROSn7uYkb5M655lABodxBes"
+              src={item.postedBy.pic}
             />
           </div>
           <div>
             <div className="userDetail">
-              <h5>Narendra Modi</h5>
-              <p>@narendramodi</p>
+              <h5>{item.postedBy.name}</h5>
+              {/* <p>@{item.postedBy.email.remove('@')}</p> */}
               <p>17 apr</p>
             </div>
-            <div>
-              भाजपा के वरिष्ठ नेता और पूर्व केंद्रीय राज्य मंत्री बची सिंह रावत
-              जी के निधन से बहुत दुख पहुंचा है। उनका पूरा जीवन जनहित और देशहित
-              में समर्पित रहा। शोक की इस घड़ी में उनके परिजनों और शुभचिंतकों के
-              प्रति मैं अपनी गहरी संवेदना व्यक्त करता हूं। ओम शांति!
+            <div  style={{height: "auto",
+    padding: "10px"}}>
+             {item.body}
             </div>
+             
+            {item.pic && 
+             <div>
+              <img width="100px" height="100px"
+              src={item.pic}
+            />  
+            </div>
+            }
+           
             <div className="actionIcons">
               <IconButton>
                 <ModeCommentOutlinedIcon />
@@ -71,111 +154,9 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="textSection">
-          <div>
-            <img
-              className="imgsSection"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsrooDvPyhvh7TyDfBlXOibVHH24mRHjF4ROSn7uYkb5M655lABodxBes"
-            />
-          </div>
-          <div>
-            <div className="userDetail">
-              <h5>Narendra Modi</h5>
-              <p>@narendramodi</p>
-              <p>17 apr</p>
-            </div>
-            <div>
-              भाजपा के वरिष्ठ नेता और पूर्व केंद्रीय राज्य मंत्री बची सिंह रावत
-              जी के निधन से बहुत दुख पहुंचा है। उनका पूरा जीवन जनहित और देशहित
-              में समर्पित रहा। शोक की इस घड़ी में उनके परिजनों और शुभचिंतकों के
-              प्रति मैं अपनी गहरी संवेदना व्यक्त करता हूं। ओम शांति!
-            </div>
-            <div className="actionIcons">
-              <IconButton>
-                <ModeCommentOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <RepeatIcon />
-              </IconButton>
-              <IconButton>
-                <FavoriteBorderOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <CloudDownloadIcon />
-              </IconButton>
-            </div>
-          </div>
-        </div>
-        <div className="textSection">
-          <div>
-            <img
-              className="imgsSection"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsrooDvPyhvh7TyDfBlXOibVHH24mRHjF4ROSn7uYkb5M655lABodxBes"
-            />
-          </div>
-          <div>
-            <div className="userDetail">
-              <h5>Narendra Modi</h5>
-              <p>@narendramodi</p>
-              <p>17 apr</p>
-            </div>
-            <div>
-              भाजपा के वरिष्ठ नेता और पूर्व केंद्रीय राज्य मंत्री बची सिंह रावत
-              जी के निधन से बहुत दुख पहुंचा है। उनका पूरा जीवन जनहित और देशहित
-              में समर्पित रहा। शोक की इस घड़ी में उनके परिजनों और शुभचिंतकों के
-              प्रति मैं अपनी गहरी संवेदना व्यक्त करता हूं। ओम शांति!
-            </div>
-            <div className="actionIcons">
-              <IconButton>
-                <ModeCommentOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <RepeatIcon />
-              </IconButton>
-              <IconButton>
-                <FavoriteBorderOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <CloudDownloadIcon />
-              </IconButton>
-            </div>
-          </div>
-        </div>
-        <div className="textSection">
-          <div>
-            <img
-              className="imgsSection"
-              src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQsrooDvPyhvh7TyDfBlXOibVHH24mRHjF4ROSn7uYkb5M655lABodxBes"
-            />
-          </div>
-          <div>
-            <div className="userDetail">
-              <h5>Narendra Modi</h5>
-              <p>@narendramodi</p>
-              <p>17 apr</p>
-            </div>
-            <div>
-              भाजपा के वरिष्ठ नेता और पूर्व केंद्रीय राज्य मंत्री बची सिंह रावत
-              जी के निधन से बहुत दुख पहुंचा है। उनका पूरा जीवन जनहित और देशहित
-              में समर्पित रहा। शोक की इस घड़ी में उनके परिजनों और शुभचिंतकों के
-              प्रति मैं अपनी गहरी संवेदना व्यक्त करता हूं। ओम शांति!
-            </div>
-            <div className="actionIcons">
-              <IconButton>
-                <ModeCommentOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <RepeatIcon />
-              </IconButton>
-              <IconButton>
-                <FavoriteBorderOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <CloudDownloadIcon />
-              </IconButton>
-            </div>
-          </div>
-        </div>
+        ))
+      }
+
       </div>
     </div>
   );

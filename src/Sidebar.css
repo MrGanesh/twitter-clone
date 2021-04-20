@@ -13,6 +13,7 @@
     color: #fff;
 }
 
+
 .MuiIconButton-root {
     flex: 0 0 auto;
     color: black;
@@ -27,7 +28,6 @@
     width: max-content;
     border-radius: 9999px;
 }
-
 .sidebar >  a > .MuiSvgIcon-root {
     font-size: 3.5rem;
     fill: rgba(29,161,242,1.00);
