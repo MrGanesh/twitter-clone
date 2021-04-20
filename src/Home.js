@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
@@ -7,28 +7,30 @@ import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import FavoriteBorderOutlinedIcon from "@material-ui/icons/FavoriteBorderOutlined";
 import RepeatIcon from "@material-ui/icons/Repeat";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import { useDataLayerValue } from "./DataLayer";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 
 function Home() {
   const [textBody, setTextBody] = useState();
   const [image, setImage] = useState();
   const [url, setUrl] = useState();
   const [data, setData] = useState();
-
-  useEffect(()=> {
-     fetch("http://localhost:5000/allpost", {
-        method: "get",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token")
-        },
-      })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          setData(data.posts)
-        });
-  }, [])
-
+  const user = JSON.parse(localStorage.getItem("user"));
+ 
+  useEffect(() => {
+    fetch("http://localhost:5000/allpost", {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        setData(data.posts);
+      });
+  }, []);
 
   useEffect(() => {
     if (url) {
@@ -51,7 +53,7 @@ function Home() {
     }
   }, [url]);
 
-  const postDetails = (e) => {
+  const postDetails = e => {
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", "insta-clone");
@@ -62,11 +64,45 @@ function Home() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('url', data.url)
+        console.log("url", data.url);
         setUrl(data.url);
       })
       .catch(err => {
         console.log(err);
+      });
+  };
+
+  const likePost = id => {
+    fetch("http://localhost:5000/like", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        postID: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("data in like post", data);
+      });
+  };
+
+  const unlikePost = id => {
+    fetch("http://localhost:5000/unlike", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        postID: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("data in like post", data);
       });
   };
 
@@ -77,10 +113,7 @@ function Home() {
 
         <div className="textSection">
           <div>
-            <img
-              className="imgSection"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2l_gilSBHxWe8fCq98Oiw83hqHwhtgY1w17tDde3QWisyvJI&s"
-            />
+            <img className="imgSection" src={user?.pic} />
           </div>
           <div style={{ width: "100%" }}>
             <TextField
@@ -110,53 +143,51 @@ function Home() {
       </div>
 
       <div className="post">
-      {
-        data?.map(item => (
-                 <div className="textSection">
-          <div>
-            <img
-              className="imgsSection"
-              src={item.postedBy.pic}
-            />
-          </div>
-          <div>
-            <div className="userDetail">
-              <h5>{item.postedBy.name}</h5>
-              {/* <p>@{item.postedBy.email.remove('@')}</p> */}
-              <p>17 apr</p>
+        {data?.map(item => (
+          <div className="textSection">
+            <div>
+              <img className="imgsSection" src={item.postedBy.pic} />
             </div>
-            <div  style={{height: "auto",
-    padding: "10px"}}>
-             {item.body}
-            </div>
-             
-            {item.pic && 
-             <div>
-              <img width="100px" height="100px"
-              src={item.pic}
-            />  
-            </div>
-            }
-           
-            <div className="actionIcons">
-              <IconButton>
-                <ModeCommentOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <RepeatIcon />
-              </IconButton>
-              <IconButton>
-                <FavoriteBorderOutlinedIcon />
-              </IconButton>
-              <IconButton>
-                <CloudDownloadIcon />
-              </IconButton>
-            </div>
-          </div>
-        </div>
-        ))
-      }
+            <div>
+              <div className="userDetail">
+                <h5>{item.postedBy.name}</h5>
+                {/* <p>@{item.postedBy.email.remove('@')}</p> */}
+                <p>17 apr</p>
+              </div>
+              <div style={{ height: "auto", padding: "10px" }}>{item.body}</div>
 
+              {item.pic && (
+                <div>
+                  <img width="100px" height="100px" src={item.pic} />
+                </div>
+              )}
+
+              <div className="actionIcons">
+                <IconButton>
+                  <ModeCommentOutlinedIcon />
+                </IconButton>
+                <IconButton>
+                  <RepeatIcon />
+                </IconButton>
+                {console.log(item.likes)}
+                {console.log(user._id)}
+                {item.likes.includes(user._id) ? (
+                  <IconButton onClick={() => unlikePost(item._id)}>
+                    <FavoriteIcon />
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={() => likePost(item._id)}>
+                    <FavoriteBorderOutlinedIcon />
+                  </IconButton>
+                )}
+
+                <IconButton>
+                  <CloudDownloadIcon />
+                </IconButton>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
