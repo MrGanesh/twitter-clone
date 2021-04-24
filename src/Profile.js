@@ -1,67 +1,64 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import "./Profile.css";
 import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import DateRangeIcon from "@material-ui/icons/DateRange";
-import Modal from '@material-ui/core/Modal';
-import { makeStyles } from '@material-ui/core/styles';
+import Modal from "@material-ui/core/Modal";
+import { makeStyles } from "@material-ui/core/styles";
 function Profile() {
-   const [open, setOpen] = useState(false);
-    const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
+  const [modalStyle] = useState(getModalStyle);
 
-    const useStyles = makeStyles(theme => ({
+  const useStyles = makeStyles(theme => ({
     modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center"
     },
     paper: {
-        position: 'absolute',
-        width: 450,
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-}));
+      position: "absolute",
+      width: 450,
+      backgroundColor: theme.palette.background.paper,
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3)
+    }
+  }));
 
+  const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userEmail = user.email.split("@");
+  console.log("user >>", user);
 
-     const classes = useStyles();
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userEmail = user.email.split('@')
-    console.log("user >>", user)
-
-    function rand() {
+  function rand() {
     return Math.round(Math.random() * 20) - 10;
-}
+  }
 
-
-
-function getModalStyle() {
+  function getModalStyle() {
     const top = 50 + rand();
     const left = 50 + rand();
     return {
-        top: `${top}%`,
-        left: `${left}%`,
-        transform: `translate(-${top}%, -${left}%)`,
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`
     };
-}
-    const handleOpen = () => {
-        setOpen(true);
-    };
+  }
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div className="profile">
       <div className="headerSection">
         <IconButton>
           <KeyboardBackspaceIcon />
-        </IconButton> 
+        </IconButton>
         <div>
-        <h3>{user?.name}</h3>
-        <p>1 Tweet </p>
+          <h3>{user?.name}</h3>
+          <p>1 Tweet </p>
         </div>
       </div>
       <div className="dpCover">
@@ -71,66 +68,79 @@ function getModalStyle() {
             <div>
               <img
                 className="imgSection"
-                src={user? user.pic : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-3PEkg0txBy4laXIQVTSKLHXxZfKv2GhRYDHK4nKoHdXpV-x&s"}
+                src={
+                  user
+                    ? user.pic
+                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-3PEkg0txBy4laXIQVTSKLHXxZfKv2GhRYDHK4nKoHdXpV-x&s"
+                }
               />
             </div>
-            <div  style={{
+            <div
+              style={{
                 "align-items": "center",
-                'display': '"flex',
-                'margin': "5px"
-              }}>
+                display: '"flex',
+                margin: "5px"
+              }}
+            >
               <h4> {user?.name} </h4>
-              <p> @{userEmail ? userEmail[0]:''}</p>
+              <p> @{userEmail ? userEmail[0] : ""}</p>
             </div>
 
             <div
               style={{
                 "align-items": "center",
-                'display': "flex",
-                'margin': '10px 10px 10px 5px'
+                display: "flex",
+                margin: "10px 10px 10px 5px"
               }}
             >
-              <DateRangeIcon style={{'padding-right': '0px'}} /> <p>Joined October 2017</p>
+              <DateRangeIcon style={{ "padding-right": "0px" }} />{" "}
+              <p>Joined October 2017</p>
             </div>
 
-            <div  style={{
+            <div
+              style={{
                 "align-items": "center",
-                'display': "flex",
-                'margin': "10px",
-                
-              }}>
-
-                <p style={{
-               
-                'margin-right': "10px",
-                
-              }}>  {user.followers.length} follower </p>
-                <p>  {user.following.length}  following </p>
-                  
+                display: "flex",
+                margin: "10px"
+              }}
+            >
+              <p
+                style={{
+                  "margin-right": "10px"
+                }}
+              >
+                {" "}
+                {user.followers.length} follower{" "}
+              </p>
+              <p> {user.following.length} following </p>
             </div>
-
           </div>
           <div className="rightSection">
-            <Button variant="contained" className="profileButton" onClick={handleOpen}>
+            <Button
+              variant="contained"
+              className="profileButton"
+              onClick={handleOpen}
+            >
               Set up profile
             </Button>
           </div>
         </div>
       </div>
 
-          <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={open}
-                onClose={handleClose}
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    <h2>Simple React Modal</h2>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan odio enim, non pharetra est ultrices et.
-                    </p>
-                </div>
-            </Modal>
+      <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={open}
+        onClose={handleClose}
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <h2>Simple React Modal</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+            accumsan odio enim, non pharetra est ultrices et.
+          </p>
+        </div>
+      </Modal>
     </div>
   );
 }
