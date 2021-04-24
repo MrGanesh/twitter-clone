@@ -17,11 +17,11 @@ function Sidebar(){
             <Link to="/">
           <TwitterIcon />
           </Link>
-            <IconButton> <HomeIcon/> Home </IconButton>
+          <Link to="/">   <IconButton> <HomeIcon/> Home </IconButton> </Link>
             <IconButton> <AddPhotoAlternateOutlinedIcon/> Explore </IconButton>
             <IconButton> <NotificationsActiveOutlinedIcon/> Notification </IconButton>
             <IconButton> <EmailOutlinedIcon/>Messages </IconButton>
-            <IconButton> <PermIdentityOutlinedIcon/>Profile </IconButton>
+          <Link to="/profile">  <IconButton> <PermIdentityOutlinedIcon/>Profile </IconButton></Link>
             <IconButton> <AppsOutlinedIcon/>More </IconButton>
             <Button variant="contained" className="tweetButton" > Tweet</Button> 
       </div>

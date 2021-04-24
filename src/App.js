@@ -8,6 +8,8 @@ import Home from "./Home";
 import Sidebar from "./Sidebar";
 import RightBar from "./RightBar"
 import {useDataLayerValue} from './DataLayer'
+import Profile from './Profile'
+
 export default function App() {
   const [{user}, dispatch] = useDataLayerValue();
 
@@ -38,6 +40,10 @@ export default function App() {
             <Switch>
               <Route exact path="/">
                 <Home />
+              
+              </Route>
+              <Route exact path="/profile">
+                <Profile />
               
               </Route>
 
