@@ -16,6 +16,7 @@ function Home() {
   const [image, setImage] = useState();
   const [url, setUrl] = useState();
   const [data, setData] = useState();
+  const [openComment, setOpenComment] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
  
   useEffect(() => {
@@ -199,12 +200,14 @@ const makeComment = (text,postID) => {
                 </div>
               )}
               <div className="actionIcons">
-               {item.comments.includes(user._id) ? (
-                <IconButton>
+               { openComment ? (
+                <IconButton onClick={(e)=> { e.preventDefault() 
+                setOpenComment(false)}}>
                   <ModeCommentIcon /> {item.comments.length} 
                 </IconButton>
                ) : (
-                <IconButton>
+                <IconButton  onClick={(e)=> { e.preventDefault() 
+                setOpenComment(true)}}>
                   <ModeCommentOutlinedIcon /> {item.comments.length} 
                 </IconButton>
                )
@@ -229,26 +232,36 @@ const makeComment = (text,postID) => {
                   <CloudDownloadIcon />
                 </IconButton>
               </div>
-
-              {
-                item.comments.map(record=> {
+              
+               { openComment ? (
+                 <>
+                 <div>
+                 {item.comments.map(record=> {
                   return(
                     <h6 key={item._id}><span><strong>{record.postedBy.name}</strong></span> : {record.text} </h6>
                   )
-                })
-              }
+                })}
+                
+                </div>
               <form onSubmit={(e) => {
                                 e.preventDefault();
                                
                                 makeComment(e.target[0].value, item._id)
                              
-                            }}>
+                            }}
+                            
+                           style={ item._id && openComment ? { display:'block'} : {display : 'none'} }  >
                     <TextField
                     id="standard-basic"
           
                     label="add comment"
                   />
               </form>
+                </>
+               ): 
+               null
+              }
+             
             </div>
           </div>
         ))}
