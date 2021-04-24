@@ -1,10 +1,58 @@
-import React from "react";
+import React,{useState} from "react";
 import "./Profile.css";
 import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import Modal from '@material-ui/core/Modal';
+import { makeStyles } from '@material-ui/core/styles';
 function Profile() {
+   const [open, setOpen] = useState(false);
+    const [modalStyle] = useState(getModalStyle);
+
+    const useStyles = makeStyles(theme => ({
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    paper: {
+        position: 'absolute',
+        width: 450,
+        backgroundColor: theme.palette.background.paper,
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+    },
+}));
+
+
+     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userEmail = user.email.split('@')
+    console.log("user >>", user)
+
+    function rand() {
+    return Math.round(Math.random() * 20) - 10;
+}
+
+
+
+function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+    return {
+        top: `${top}%`,
+        left: `${left}%`,
+        transform: `translate(-${top}%, -${left}%)`,
+    };
+}
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
   return (
     <div className="profile">
       <div className="headerSection">
@@ -12,7 +60,7 @@ function Profile() {
           <KeyboardBackspaceIcon />
         </IconButton> 
         <div>
-        <h3>Ganesh Kulkarni</h3>
+        <h3>{user?.name}</h3>
         <p>1 Tweet </p>
         </div>
       </div>
@@ -23,7 +71,7 @@ function Profile() {
             <div>
               <img
                 className="imgSection"
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-3PEkg0txBy4laXIQVTSKLHXxZfKv2GhRYDHK4nKoHdXpV-x&s"
+                src={user? user.pic : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-3PEkg0txBy4laXIQVTSKLHXxZfKv2GhRYDHK4nKoHdXpV-x&s"}
               />
             </div>
             <div  style={{
@@ -31,8 +79,8 @@ function Profile() {
                 'display': '"flex',
                 'margin': "5px"
               }}>
-              <h4> Ganesh Kulkarni </h4>
-              <p> @ganeshkulkarni689</p>
+              <h4> {user?.name} </h4>
+              <p> @{userEmail ? userEmail[0]:''}</p>
             </div>
 
             <div
@@ -56,19 +104,33 @@ function Profile() {
                
                 'margin-right': "10px",
                 
-              }}>  1 follower </p>
-                <p>  2 following </p>
+              }}>  {user.followers.length} follower </p>
+                <p>  {user.following.length}  following </p>
                   
             </div>
 
           </div>
           <div className="rightSection">
-            <Button variant="contained" className="profileButton">
+            <Button variant="contained" className="profileButton" onClick={handleOpen}>
               Set up profile
             </Button>
           </div>
         </div>
       </div>
+
+          <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={open}
+                onClose={handleClose}
+            >
+                <div style={modalStyle} className={classes.paper}>
+                    <h2>Simple React Modal</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi accumsan odio enim, non pharetra est ultrices et.
+                    </p>
+                </div>
+            </Modal>
     </div>
   );
 }

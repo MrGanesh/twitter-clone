@@ -18,7 +18,7 @@ function Home() {
   const [data, setData] = useState();
   const [openComment, setOpenComment] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
- 
+
   useEffect(() => {
     fetch("http://localhost:5000/allpost", {
       method: "get",
