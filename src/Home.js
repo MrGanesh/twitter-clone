@@ -10,6 +10,7 @@ import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import { useDataLayerValue } from "./DataLayer";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
+import {Link} from 'react-router-dom'
 
 function Home() {
   const [textBody, setTextBody] = useState();
@@ -188,7 +189,11 @@ const makeComment = (text,postID) => {
             </div>
             <div>
               <div className="userDetail">
-                <h5>{item.postedBy.name}</h5>
+                <h5>
+                    <Link to={item.postedBy._id !== user._id ? '/profile/'+item.postedBy._id : 'profile'}> 
+                        {item.postedBy.name}
+                    </Link>
+                </h5>
                 {/* <p>@{item.postedBy.email.remove('@')}</p> */}
                 <p>17 apr</p>
               </div>

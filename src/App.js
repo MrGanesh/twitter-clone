@@ -9,7 +9,7 @@ import Sidebar from "./Sidebar";
 import RightBar from "./RightBar"
 import {useDataLayerValue} from './DataLayer'
 import Profile from './Profile'
-
+import UserProfile from './UserProfile'
 export default function App() {
   const [{user}, dispatch] = useDataLayerValue();
 
@@ -44,6 +44,10 @@ export default function App() {
               </Route>
               <Route exact path="/profile">
                 <Profile />
+              
+              </Route>
+              <Route exact path="/profile/:userid">
+                <UserProfile />
               
               </Route>
 
