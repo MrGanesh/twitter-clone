@@ -81,7 +81,10 @@ function Profile() {
                   pic:data.url
               })
             }).then(res=> res.json())
-            .then(data=>  localStorage.setItem('user', JSON.stringify(data)))
+            .then(data=> {
+              console.log("data in upload", data)
+                  localStorage.setItem('user', JSON.stringify(data))
+            } )
         })
 
 
