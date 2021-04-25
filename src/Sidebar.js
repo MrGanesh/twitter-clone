@@ -75,6 +75,14 @@ function Sidebar() {
           <HomeIcon /> Home{" "}
         </IconButton>{" "}
       </Link>
+         <Link to="/profile">
+        {" "}
+        <IconButton>
+          {" "}
+          <PermIdentityOutlinedIcon />
+          Profile{" "}
+        </IconButton>
+      </Link>
       <IconButton>
         {" "}
         <AddPhotoAlternateOutlinedIcon /> Explore{" "}
@@ -88,14 +96,7 @@ function Sidebar() {
         <EmailOutlinedIcon />
         Messages{" "}
       </IconButton>
-      <Link to="/profile">
-        {" "}
-        <IconButton>
-          {" "}
-          <PermIdentityOutlinedIcon />
-          Profile{" "}
-        </IconButton>
-      </Link>
+   
       <IconButton>
         {" "}
         <AppsOutlinedIcon />
