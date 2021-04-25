@@ -31,7 +31,7 @@ function Profile() {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("user"));
   const userEmail = user.email.split("@");
-  console.log("user >>", user);
+
 
   function rand() {
     return Math.round(Math.random() * 20) - 10;

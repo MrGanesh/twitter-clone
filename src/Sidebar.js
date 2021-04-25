@@ -13,6 +13,7 @@ import AppsOutlinedIcon from '@material-ui/icons/AppsOutlined';
 
 function Sidebar(){
    const user = JSON.parse(localStorage.getItem("user"));
+     const userEmail = user.email.split("@");
     return(
       <div className="sidebar">
             <Link to="/">
@@ -31,8 +32,8 @@ function Sidebar(){
                   <img className="imgSection" src={user?.pic} />
                 </div>
                 <div>
-                <h6> Ganesh Kulkarni </h6>
-               <p> @ganeshkulkarni </p>
+                <h6> {user?user.name : ''} </h6>
+               <p> @{userEmail ? userEmail[0] : ""}</p>
                 </div>
             </div>
       </div>
