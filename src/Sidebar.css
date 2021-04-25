@@ -104,6 +104,7 @@ a {
      width: inherit;
     /* border-bottom: 1px solid #e5e5e5; */
     padding-left: 30px;
+    cursor: pointer;
 }
 
 .logOutBtnModal:hover {
