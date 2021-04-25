@@ -307,7 +307,7 @@ useEffect(()=>{
 
             <input id="file-input" type="file"  onChange={e => setImage(e.target.files[0]) } />
           </div>
-          <div className="changeImgBtn">
+          {/* <div className="changeImgBtn">
               <Button
               variant="contained"
               className="profileButton"
@@ -315,7 +315,7 @@ useEffect(()=>{
             >
             submit
             </Button>
-          </div>
+          </div> */}
         </div>
       </Modal>
 
