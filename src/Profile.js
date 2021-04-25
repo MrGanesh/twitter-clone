@@ -11,7 +11,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 function Profile() {
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
-
+  const [image, setImage] = useState()
   const useStyles = makeStyles(theme => ({
     modal: {
       display: "flex",
@@ -147,11 +147,12 @@ function Profile() {
           </p>
 
           <div class="image-upload">
-            <label for="file-input">
-              <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqD5qczXVLXW420t8DmaCVx8r_3-ohwona0tJygDLg0E4OrpX&s"/>
+            <label for="file-input"> 
+            {console.log("image >> ", image)}
+              <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqD5qczXVLXW420t8DmaCVx8r_3-ohwona0tJygDLg0E4OrpX&s" />
             </label>
 
-            <input id="file-input" type="file" />
+            <input id="file-input" type="file"  onChange={e => setImage(e.target.files[0]) } />
           </div>
         </div>
       </Modal>
