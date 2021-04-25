@@ -1,0 +1,7 @@
+.leftsSection{
+  display: flex;
+    flex-direction: column;
+    justify-content: unset;
+    margin-left: auto;
+    margin-right: auto;
+}

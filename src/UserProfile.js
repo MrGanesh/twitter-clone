@@ -18,6 +18,7 @@ import RepeatIcon from "@material-ui/icons/Repeat";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
+import './UserProfile.css'
 
 function Profile() {
 
@@ -26,7 +27,7 @@ function Profile() {
    const [userProfile, setUserProfile] = useState()
    const {userid} = useParams()
   const user = JSON.parse(localStorage.getItem("user"));
-  const userEmail = user.email.split("@");
+  const userEmail = userProfile?.email.split("@");
 
 
 
@@ -41,7 +42,8 @@ useEffect(()=>{
       }).then(res=> res.json())
       .then(data=> {
         console.log('data in userProfile',data)
-        // setData(data.post)
+        setData(data.post)
+        setUserProfile(data.user)
       })
 },[])
 
@@ -54,20 +56,20 @@ useEffect(()=>{
         </IconButton>
         </Link>
         <div>
-          <h3>{user?.name}</h3>
+          <h3>{userProfile?.name}</h3>
           <p>1 Tweet </p>
         </div>
       </div>
       <div className="dpCover">
         {/* <div className="coverImage" /> */}
         <div className="dpSection">
-          <div className="leftSection">
+          <div className="leftsSection">
             <div>
               <img
                 className="imgSectionModal"
                 src={
-                  user
-                    ? user.pic
+                  userProfile
+                    ? userProfile.pic
                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc-3PEkg0txBy4laXIQVTSKLHXxZfKv2GhRYDHK4nKoHdXpV-x&s"
                 }
               />
@@ -79,7 +81,7 @@ useEffect(()=>{
                 margin: "5px"
               }}
             >
-              <h4> {user?.name} </h4>
+              <h4> {userProfile?.name} </h4>
               <p> @{userEmail ? userEmail[0] : ""}</p>
             </div>
 
@@ -107,9 +109,9 @@ useEffect(()=>{
                 }}
               >
                 {" "}
-                {user.followers.length} follower{" "}
+                {userProfile?.followers.length} follower{" "}
               </p>
-              <p> {user.following.length} following </p>
+              <p> {userProfile?.following.length} following </p>
             </div>
           </div>
        
