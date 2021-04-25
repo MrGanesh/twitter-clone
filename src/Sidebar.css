@@ -17,7 +17,7 @@
 .MuiIconButton-root {
     flex: 0 0 auto;
     color: black;
-   padding: 15px 20px 15px 15px;
+   padding: 15px 20px 15px 5px;
     overflow: visible;
     font-size: 1.2rem;
     text-align: center;
@@ -29,7 +29,7 @@
     border-radius: 9999px;
 }
 .sidebar >  a > .MuiSvgIcon-root {
-    font-size: 3.5rem;
+    font-size: 1.5rem;
     fill: rgba(29,161,242,1.00);
     padding-right: 15px !important;
 }
