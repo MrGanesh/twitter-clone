@@ -85,7 +85,7 @@ function Sidebar() {
       </Link>
       <IconButton>
         {" "}
-        <AddPhotoAlternateOutlinedIcon /> Explore{" "}
+        <AddPhotoAlternateOutlinedIcon /> Explore  Followers{" "}
       </IconButton>
       <IconButton>
         {" "}
