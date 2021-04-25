@@ -154,6 +154,15 @@ function Profile() {
 
             <input id="file-input" type="file"  onChange={e => setImage(e.target.files[0]) } />
           </div>
+          <div className="changeImgBtn">
+              <Button
+              variant="contained"
+              className="profileButton"
+              
+            >
+            submit
+            </Button>
+          </div>
         </div>
       </Modal>
     </div>
