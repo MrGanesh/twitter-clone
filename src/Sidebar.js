@@ -26,14 +26,18 @@ function Sidebar() {
       justifyContent: "center"
     },
     paper: {
-     width: 'max-content',
-    padding: '16px 32px 24px',
+      height: '104px',
+     width: '250px',
+    // padding: '16px 32px 24px',
     position: 'fixed',
     boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%)',
     borderRadius: '10px',
     backgroundColor: '#fff',
     bottom: '25%',
-    left: '5%'
+    left: '5%',
+    alignItems:'center',
+    display:'flex',
+    flexDirection:'column'
     }
   }));
 
@@ -126,6 +130,12 @@ function Sidebar() {
               <h6> {user ? user.name : ""} </h6>
               <p> @{userEmail ? userEmail[0] : ""}</p>
             </div>
+          </div>
+          <div className="logOutBtnModal" onClick={(e) => {
+            e.preventDefault()
+            localStorage.clear()
+          }}>
+               <p style={{margin:'10px 0px 10px 0px', fontSize: '16px' , width:'100%' }}> Logout @{userEmail ? userEmail[0] : ""}</p>
           </div>
         </div>
       </Modal>

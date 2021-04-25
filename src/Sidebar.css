@@ -77,18 +77,38 @@ a {
 
 
 .logOutSectionModal {
-  display: flex;
+  /* display: flex;
   align-items: center;
   height: max-content;
   width: max-content;
-  padding: 5px 20px 5px 20px;
-   border-bottom: 1px solid #e5e5e5;
+  /* padding: 5px 20px 5px 20px; */
+   /* border-bottom: 1px solid #e5e5e5;  */
+
+    display: flex;
+    align-items: center;
+    width: inherit;
+    padding-top: 10px;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .logOutSectionModal.imgSection {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  margin: 0px 15px 0px 15px;
+  /* margin: 0px 15px 0px 15px; */
 }
 
+.logOutBtnModal{
+  
+    display: flex;
+     width: inherit;
+    /* border-bottom: 1px solid #e5e5e5; */
+    padding-left: 30px;
+}
+
+.logOutBtnModal:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.logOutSectionModal:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
