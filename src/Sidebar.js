@@ -12,6 +12,7 @@ import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined';
 import AppsOutlinedIcon from '@material-ui/icons/AppsOutlined';
 
 function Sidebar(){
+   const user = JSON.parse(localStorage.getItem("user"));
     return(
       <div className="sidebar">
             <Link to="/">
@@ -24,6 +25,16 @@ function Sidebar(){
           <Link to="/profile">  <IconButton> <PermIdentityOutlinedIcon/>Profile </IconButton></Link>
             <IconButton> <AppsOutlinedIcon/>More </IconButton>
             <Button variant="contained" className="tweetButton" > Tweet</Button> 
+
+            <div className="logOutSection">
+                <div>
+                  <img className="imgSection" src={user?.pic} />
+                </div>
+                <div>
+                <h6> Ganesh Kulkarni </h6>
+               <p> @ganeshkulkarni </p>
+                </div>
+            </div>
       </div>
     )
 }

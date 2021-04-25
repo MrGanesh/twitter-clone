@@ -56,3 +56,8 @@
 a{
   text-decoration: none;
 }
+
+.logOutSection{
+  display: flex;
+  align-items: center;
+}
