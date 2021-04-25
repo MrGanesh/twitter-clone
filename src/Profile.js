@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./Profile.css";
 import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
@@ -7,6 +7,7 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import TwitterIcon from '@material-ui/icons/Twitter';
+import {Link} from 'react-router-dom'
 
 function Profile() {
   const [open, setOpen] = useState(false);
@@ -53,12 +54,50 @@ function Profile() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(()=> {
+        if(image){
+           const data = new FormData()
+        data.append("file",image)
+        data.append("upload_preset","insta-clone")
+        data.append("cloud_name","saaho-insta")
+        
+        fetch("https://api.cloudinary.com/v1_1/saaho-insta/image/upload",{
+            method:"post",
+            body:data
+        })
+        .then(res=>res.json())
+        .then(data=>{
+
+            console.log("data in cloudinary",data)
+
+            fetch('http://localhost:5000/updateProfile', {
+              method:'put',
+              headers :{
+                'Content-Type':'application/json',
+                'Authorization':'Bearer '+localStorage.getItem('token')
+              },
+              body: JSON.stringify({
+                  pic:data.url
+              })
+            }).then(res=> res.json())
+            .then(data=>  localStorage.setItem('user', JSON.stringify(data)))
+        })
+
+
+        }
+  },[image])
+
+
+
   return (
     <div className="profile">
-      <div className="headerSection">
+      <div className="headerSection"> 
+      <Link to="/">
         <IconButton>
           <KeyboardBackspaceIcon />
         </IconButton>
+        </Link>
         <div>
           <h3>{user?.name}</h3>
           <p>1 Tweet </p>
