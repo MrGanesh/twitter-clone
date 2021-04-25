@@ -62,3 +62,24 @@ background: rgb(196, 207, 214);
   margin: 0px 15px 15px 15px;;
 }
 
+.twitterIcon{
+  display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+.twitterIcon.MuiSvgIcon-root {
+    font-size: 2.5rem;
+}
+
+.image-upload>input {
+  display: none;
+ 
+}
+.image-upload {
+  display: flex;
+  justify-content: center;
+}
+.image-upload img{
+  border-radius: 50%;
+  margin: 15px 0 15px 0;
+}

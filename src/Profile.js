@@ -6,6 +6,8 @@ import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
+import TwitterIcon from '@material-ui/icons/Twitter';
+
 function Profile() {
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
@@ -21,7 +23,8 @@ function Profile() {
       width: 450,
       backgroundColor: theme.palette.background.paper,
       boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3)
+      padding: theme.spacing(2, 4, 3),
+      borderRadius: '10px'
     }
   }));
 
@@ -134,11 +137,22 @@ function Profile() {
         onClose={handleClose}
       >
         <div style={modalStyle} className={classes.paper}>
-          <h2>Simple React Modal</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            accumsan odio enim, non pharetra est ultrices et.
+        <div className="twitterIcon">
+            <TwitterIcon />
+        </div>
+       
+          <h2 style={{margin: '10px 0px 10px 0px'}}>Pick a profile picture</h2>
+          <p style={{margin: '10px 0px 10px 0px'}}>
+           Have a favorite selfie? Upload it now.
           </p>
+
+          <div class="image-upload">
+            <label for="file-input">
+              <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoqD5qczXVLXW420t8DmaCVx8r_3-ohwona0tJygDLg0E4OrpX&s"/>
+            </label>
+
+            <input id="file-input" type="file" />
+          </div>
         </div>
       </Modal>
     </div>
