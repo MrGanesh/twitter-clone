@@ -63,6 +63,60 @@ function Profile() {
         .then(result=> console.log('result in Unfollow API',result))
   }
 
+  const makeComment = (text,postID) => {
+        fetch('http://localhost:5000/comment',{
+            method:'put',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+localStorage.getItem('token')
+            },
+            body: JSON.stringify({
+                postID,
+                text,
+            })
+        }).then(res => res.json())
+        .then(result => {
+            console.log(result)
+          
+        }).catch(err =>console.log(err));
+        // })
+    }
+
+const likePost = id => {
+    fetch("http://localhost:5000/like", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        postID: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("data in like post", data);
+      });
+  };
+
+  const unlikePost = id => {
+    fetch("http://localhost:5000/unlike", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token")
+      },
+      body: JSON.stringify({
+        postID: id
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log("data in like post", data);
+      });
+  };
+
+
 useEffect(()=>{
       fetch(`http://localhost:5000/user/${userid}`, {
         method:'get',
