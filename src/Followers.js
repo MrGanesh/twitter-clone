@@ -19,7 +19,7 @@ useEffect(() => {
         setData(data.result);
       });
   }, []);
-
+const userEmail=[];
 return(
   <div className='follow-main'>
   {
@@ -30,8 +30,11 @@ return(
       <div className='followers'>
       <img src='https://i2.cinestaan.com/image-bank/1500-1500/140001-141000/140489.jpg' alt='' />
       <div> 
-      <h4> Amruta</h4>
-      <p> @ Amruta </p>
+      <h4> {item.name}</h4>
+      {
+        userEmail=  item.email.split("@")
+      }
+      <p> {userEmail? userEmail[0] : null}  </p>
       </div>
     </div>
    })
