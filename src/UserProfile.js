@@ -8,6 +8,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 import TwitterIcon from '@material-ui/icons/Twitter';
 import {Link,useParams} from 'react-router-dom'
+import { Button } from "@material-ui/core";
 
 import TextField from "@material-ui/core/TextField";
 
@@ -30,7 +31,37 @@ function Profile() {
   const userEmail = userProfile?.email.split("@");
 
 
+ const FollowClick=(e)=>{
+    e.preventDefault()
+    fetch(`http://localhost:5000/follow`,{
+      method:'put',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization':'Bearer '+localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          id:userid
+        })
+      
+    }) .then(res=> res.json())
+        .then(result=> console.log('result in follow API',result))
+  }
 
+ const UnFollowClick=(e)=>{
+    e.preventDefault()
+    fetch(`http://localhost:5000/unfollow`,{
+      method:'put',
+        headers:{
+          'Content-Type':'application/json',
+          'Authorization':'Bearer '+localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          id:userid
+        })
+      
+    }) .then(res=> res.json())
+        .then(result=> console.log('result in Unfollow API',result))
+  }
 
 useEffect(()=>{
       fetch(`http://localhost:5000/user/${userid}`, {
@@ -112,6 +143,30 @@ useEffect(()=>{
                 {userProfile?.followers.length} follower{" "}
               </p>
               <p> {userProfile?.following.length} following </p>
+
+            </div>
+            <div> 
+            {user.following.includes(userid)? (
+                <Button
+              variant="contained"
+              className="followButton"
+              onClick={(e)=>UnFollowClick(e)}
+            >
+              UnFollow
+            </Button>
+            ) : (
+                  <Button
+              variant="contained"
+              className="followButton"
+              onClick={(e)=>FollowClick(e)}
+            >
+              Follow
+            </Button>
+
+            )}
+
+          
+            
             </div>
           </div>
        

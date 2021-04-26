@@ -111,7 +111,10 @@ useEffect(()=>{
           'Authorization':'Bearer '+localStorage.getItem('token')
         }
       }).then(res=> res.json())
-      .then(data=> setData(data.post))
+      .then(data=> {setData(data.post)
+      console.log('data in mypost',data)
+       localStorage.setItem('user', JSON.stringify(data.user))
+      })
 },[])
 
   return (

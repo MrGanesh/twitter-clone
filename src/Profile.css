@@ -47,7 +47,7 @@ background: rgb(196, 207, 214);
     text-transform: none;
     margin: 10px;
 }
-.profilButton.MuiButton-contained:hover {
+.profileButton.MuiButton-contained:hover {
     color: rgba(29,161,242,1.00);
     border: rgba(29,161,242,1.00);
     box-shadow: #ffff;
