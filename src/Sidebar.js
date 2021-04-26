@@ -83,14 +83,18 @@ function Sidebar() {
           Profile{" "}
         </IconButton>
       </Link>
+        <Link to="/subpost">
       <IconButton>
         {" "}
         <AddPhotoAlternateOutlinedIcon /> Explore  Followers{" "}
       </IconButton>
+      </Link>
+       <Link to="/follow">
       <IconButton>
         {" "}
-        <NotificationsActiveOutlinedIcon /> Notification{" "}
+        <NotificationsActiveOutlinedIcon /> Followers{" "}
       </IconButton>
+      </Link>
       <IconButton>
         {" "}
         <EmailOutlinedIcon />

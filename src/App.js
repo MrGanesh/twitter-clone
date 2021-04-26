@@ -6,6 +6,8 @@ import LandingPage from "./LandingPage";
 import Signup from "./Signup";
 import Home from "./Home";
 import Sidebar from "./Sidebar";
+import ExploreFollower from "./ExploreFollower";
+import Followers from "./Followers";
 import RightBar from "./RightBar"
 import {useDataLayerValue} from './DataLayer'
 import Profile from './Profile'
@@ -48,6 +50,14 @@ export default function App() {
               </Route>
               <Route exact path="/profile/:userid">
                 <UserProfile />
+              
+              </Route>
+              <Route exact path="/subpost">
+                <ExploreFollower />
+              
+              </Route>
+              <Route exact path="/follow">
+                <Followers />
               
               </Route>
 
