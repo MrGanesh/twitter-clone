@@ -1,0 +1,26 @@
+.followers {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-evenly; */
+  width: auto;
+  background-color: #ffff;
+  padding: 25px 10px 10px 10px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+
+.followers > img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.follow-main {
+  margin-right: auto;
+  margin-left: auto;
+  flex: 0.5;
+  width: 250px;
+  background-color: #e5e5e5;
+  margin-bottom: 15px;
+}

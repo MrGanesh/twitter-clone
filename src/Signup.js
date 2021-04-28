@@ -13,7 +13,7 @@ function Signup() {
   const [password, setPassword] = useState("");
 
   const signup = e => {
-    fetch("http://localhost:5000/signup", {
+    fetch("https://twitter-clone-fullstack.herokuapp.com/signup", {
       method: "post",
       headers: {
         "Content-Type": "application/json"

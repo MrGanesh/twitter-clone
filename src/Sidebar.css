@@ -1,18 +1,18 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  left: 0;
+  left: 0 !important ;
   flex: 0.23;
   height: 100%;
   margin: 25px 0px 25px 50px;
 }
 
-.MuiIconButton-root:hover {
+.sidebar > .MuiIconButton-root:hover {
   background-color: rgb(29 161 242 / 38%);
   color: #fff;
 }
 
-.MuiIconButton-root {
+.sidebar > .MuiIconButton-root {
   flex: 0 0 auto;
   color: black;
   padding: 15px 20px 15px 5px;
@@ -26,13 +26,33 @@
   width: max-content;
   border-radius: 9999px;
 }
-.sidebar > a > .MuiSvgIcon-root {
-  font-size: 1.5rem;
-  fill: rgba(29, 161, 242, 1);
-  padding-right: 15px !important;
+
+.sidebar > a > .MuiIconButton-root:hover {
+  background-color: rgb(29 161 242 / 38%);
+  color: #fff;
 }
 
-.MuiButton-contained {
+.sidebar > a > .MuiIconButton-root {
+  flex: 0 0 auto;
+  color: black;
+  padding: 15px 20px 15px 5px;
+  overflow: visible;
+  font-size: 1.2rem;
+  text-align: center;
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  /* border-radius: 15%; */
+  font-weight: 800;
+  justify-content: flex-start;
+  width: max-content;
+  border-radius: 9999px;
+}
+.MuiSvgIcon-root {
+  font-size: 1.5rem;
+  fill: rgba(29, 161, 242, 1);
+  padding-right: 15px !important ;
+}
+
+.sidebar > .MuiButton-contained {
   color: white;
   box-shadow: rgba(29, 161, 242, 1);
   background-color: rgba(29, 161, 242, 1);
@@ -44,10 +64,10 @@
   margin-top: 20px;
 }
 
-.MuiSvgIcon-root {
+.sidebar > .MuiSvgIcon-root {
   fill: rgba(29, 161, 242, 1);
   color: rgba(29, 161, 242, 1);
-  padding-right: 15px;
+  padding-right: 15px !important;
 }
 
 a {
@@ -75,20 +95,19 @@ a {
   border-radius: 9999px;
 }
 
-
 .logOutSectionModal {
   /* display: flex;
   align-items: center;
   height: max-content;
   width: max-content;
   /* padding: 5px 20px 5px 20px; */
-   /* border-bottom: 1px solid #e5e5e5;  */
+  /* border-bottom: 1px solid #e5e5e5;  */
 
-    display: flex;
-    align-items: center;
-    width: inherit;
-    padding-top: 10px;
-    border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  width: inherit;
+  padding-top: 10px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .logOutSectionModal.imgSection {
@@ -98,13 +117,12 @@ a {
   /* margin: 0px 15px 0px 15px; */
 }
 
-.logOutBtnModal{
-  
-    display: flex;
-     width: inherit;
-    /* border-bottom: 1px solid #e5e5e5; */
-    padding-left: 30px;
-    cursor: pointer;
+.logOutBtnModal {
+  display: flex;
+  width: inherit;
+  /* border-bottom: 1px solid #e5e5e5; */
+  padding-left: 30px;
+  cursor: pointer;
 }
 
 .logOutBtnModal:hover {

@@ -10,7 +10,7 @@ import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import { useDataLayerValue } from "./DataLayer";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ModeCommentIcon from '@material-ui/icons/ModeComment';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 function ExploreFollower() {
 
@@ -19,7 +19,7 @@ function ExploreFollower() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    fetch("http://localhost:5000/subpost", {
+    fetch("https://twitter-clone-fullstack.herokuapp.com/subpost", {
       method: "get",
       headers: {
         "Content-Type": "application/json",
@@ -28,16 +28,16 @@ function ExploreFollower() {
     })
       .then(res => res.json())
       .then(data => {
-        console.log("explorefollowers",data);
+        console.log("explorefollowers", data);
         setData(data.posts);
       });
   }, []);
 
- 
 
- 
+
+
   const likePost = id => {
-    fetch("http://localhost:5000/like", {
+    fetch("https://twitter-clone-fullstack.herokuapp.com/like", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -54,7 +54,7 @@ function ExploreFollower() {
   };
 
   const unlikePost = id => {
-    fetch("http://localhost:5000/unlike", {
+    fetch("https://twitter-clone-fullstack.herokuapp.com/unlike", {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -70,28 +70,28 @@ function ExploreFollower() {
       });
   };
 
-const makeComment = (text,postID) => {
-        fetch('http://localhost:5000/comment',{
-            method:'put',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+localStorage.getItem('token')
-            },
-            body: JSON.stringify({
-                postID,
-                text,
-            })
-        }).then(res => res.json())
-        .then(result => {
-            console.log(result)
-          
-        }).catch(err =>console.log(err));
-        // })
-    }
+  const makeComment = (text, postID) => {
+    fetch('https://twitter-clone-fullstack.herokuapp.com/comment', {
+      method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        postID,
+        text,
+      })
+    }).then(res => res.json())
+      .then(result => {
+        console.log(result)
+
+      }).catch(err => console.log(err));
+    // })
+  }
 
   return (
     <div className="home">
-     
+
 
       <div className="post">
         {data?.map(item => (
@@ -102,9 +102,9 @@ const makeComment = (text,postID) => {
             <div>
               <div className="userDetail">
                 <h5>
-                    <Link to={item.postedBy._id !== user._id ? '/profile/'+item.postedBy._id : 'profile'}> 
-                        {item.postedBy.name}
-                    </Link>
+                  <Link to={item.postedBy._id !== user._id ? '/profile/' + item.postedBy._id : 'profile'}>
+                    {item.postedBy.name}
+                  </Link>
                 </h5>
                 {/* <p>@{item.postedBy.email.remove('@')}</p> */}
                 <p>17 apr</p>
@@ -117,31 +117,35 @@ const makeComment = (text,postID) => {
                 </div>
               )}
               <div className="actionIcons">
-               { openComment ? (
-                <IconButton onClick={(e)=> { e.preventDefault() 
-                setOpenComment(false)}}>
-                  <ModeCommentIcon /> {item.comments.length} 
-                </IconButton>
-               ) : (
-                <IconButton  onClick={(e)=> { e.preventDefault() 
-                setOpenComment(true)}}>
-                  <ModeCommentOutlinedIcon /> {item.comments.length} 
-                </IconButton>
-               )
-            }
-               
-               
+                {openComment ? (
+                  <IconButton onClick={(e) => {
+                    e.preventDefault()
+                    setOpenComment(false)
+                  }}>
+                    <ModeCommentIcon /> {item.comments.length}
+                  </IconButton>
+                ) : (
+                  <IconButton onClick={(e) => {
+                    e.preventDefault()
+                    setOpenComment(true)
+                  }}>
+                    <ModeCommentOutlinedIcon /> {item.comments.length}
+                  </IconButton>
+                )
+                }
+
+
                 <IconButton>
                   <RepeatIcon />
                 </IconButton>
-              
+
                 {item.likes.includes(user._id) ? (
                   <IconButton onClick={() => unlikePost(item._id)}>
-                    <FavoriteIcon /> {item.likes.length} 
+                    <FavoriteIcon /> {item.likes.length}
                   </IconButton>
                 ) : (
                   <IconButton onClick={() => likePost(item._id)}>
-                    <FavoriteBorderOutlinedIcon /> {item.likes.length} 
+                    <FavoriteBorderOutlinedIcon /> {item.likes.length}
                   </IconButton>
                 )}
 
@@ -149,36 +153,36 @@ const makeComment = (text,postID) => {
                   <CloudDownloadIcon />
                 </IconButton>
               </div>
-              
-               { openComment ? (
-                 <>
-                 <div>
-                 {item.comments.map(record=> {
-                  return(
-                    <h6 key={item._id}><span><strong>{record.postedBy.name}</strong></span> : {record.text} </h6>
-                  )
-                })}
-                
-                </div>
-              <form onSubmit={(e) => {
-                                e.preventDefault();
-                               
-                                makeComment(e.target[0].value, item._id)
-                             
-                            }}
-                            
-                           style={ item._id && openComment ? { display:'block'} : {display : 'none'} }  >
+
+              {openComment ? (
+                <>
+                  <div>
+                    {item.comments.map(record => {
+                      return (
+                        <h6 key={item._id}><span><strong>{record.postedBy.name}</strong></span> : {record.text} </h6>
+                      )
+                    })}
+
+                  </div>
+                  <form onSubmit={(e) => {
+                    e.preventDefault();
+
+                    makeComment(e.target[0].value, item._id)
+
+                  }}
+
+                    style={item._id && openComment ? { display: 'block' } : { display: 'none' }}  >
                     <TextField
-                    id="standard-basic"
-          
-                    label="add comment"
-                  />
-              </form>
+                      id="standard-basic"
+
+                      label="add comment"
+                    />
+                  </form>
                 </>
-               ): 
-               null
+              ) :
+                null
               }
-             
+
             </div>
           </div>
         ))}

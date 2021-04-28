@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import "./Sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import HomeIcon from "@material-ui/icons/Home";
 import AddPhotoAlternateOutlinedIcon from "@material-ui/icons/AddPhotoAlternateOutlined";
@@ -14,6 +14,7 @@ import Modal from "@material-ui/core/Modal";
 import { makeStyles } from "@material-ui/core/styles";
 
 function Sidebar() {
+  const history = useHistory()
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
 
@@ -27,18 +28,18 @@ function Sidebar() {
     },
     paper: {
       height: '135px',
-     width: '-webkit-fill-available',
+      width: '-webkit-fill-available',
       maxWidth: '300px',
-    // padding: '16px 32px 24px',
-    position: 'fixed',
-    boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%)',
-    borderRadius: '10px',
-    backgroundColor: '#fff',
-    bottom: '25%',
-    left: '5%',
-    alignItems:'center',
-    display:'flex',
-    flexDirection:'column'
+      // padding: '16px 32px 24px',
+      position: 'fixed',
+      boxShadow: '0px 3px 5px -1px rgb(0 0 0 / 20%), 0px 5px 8px 0px rgb(0 0 0 / 14%), 0px 1px 14px 0px rgb(0 0 0 / 12%)',
+      borderRadius: '10px',
+      backgroundColor: '#fff',
+      bottom: '25%',
+      left: '5%',
+      alignItems: 'center',
+      display: 'flex',
+      flexDirection: 'column'
     }
   }));
 
@@ -75,7 +76,7 @@ function Sidebar() {
           <HomeIcon /> Home{" "}
         </IconButton>{" "}
       </Link>
-         <Link to="/profile">
+      <Link to="/profile">
         {" "}
         <IconButton>
           {" "}
@@ -83,30 +84,35 @@ function Sidebar() {
           Profile{" "}
         </IconButton>
       </Link>
-        <Link to="/subpost">
-      <IconButton>
-        {" "}
-        <AddPhotoAlternateOutlinedIcon /> Explore  Followers{" "}
-      </IconButton>
+      <Link to="/subpost">
+        <IconButton>
+          {" "}
+          <AddPhotoAlternateOutlinedIcon /> Explore  Followers{" "}
+        </IconButton>
       </Link>
-       <Link to="/follow">
-      <IconButton>
-        {" "}
-        <NotificationsActiveOutlinedIcon /> Followers{" "}
-      </IconButton>
+      <Link to="/follow">
+        <IconButton>
+          {" "}
+          <NotificationsActiveOutlinedIcon /> Followers{" "}
+        </IconButton>
       </Link>
-      <IconButton>
-        {" "}
-        <EmailOutlinedIcon />
-        Messages{" "}
-      </IconButton>
-   
+      <Link to="/following">
+        <IconButton>
+          {" "}
+          <EmailOutlinedIcon />
+        Following{" "}
+        </IconButton>
+      </Link>
       <IconButton>
         {" "}
         <AppsOutlinedIcon />
         More{" "}
       </IconButton>
-      <Button variant="contained" className="tweetButton">
+
+      <Button variant="contained" className="tweetButton" onClick={(e) => {
+        e.preventDefault();
+        history.push('/')
+      }}>
         {" "}
         Tweet
       </Button>
@@ -141,7 +147,7 @@ function Sidebar() {
             e.preventDefault()
             localStorage.clear()
           }}>
-               <p style={{margin:'10px 0px 10px 0px', fontSize: '16px' , width:'100%' }}> Logout @{userEmail ? userEmail[0] : ""}</p>
+            <p style={{ margin: '10px 0px 10px 0px', fontSize: '16px', width: '100%' }}> Logout @{userEmail ? userEmail[0] : ""}</p>
           </div>
         </div>
       </Modal>

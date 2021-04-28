@@ -1,4 +1,4 @@
-.login{
+.login {
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -13,41 +13,39 @@
   margin-bottom: 20px;
 }
 
-.login >  a > .MuiSvgIcon-root {
-    font-size: 3.5rem;
-    fill: rgba(29,161,242,1.00);
+.login > a > .MuiSvgIcon-root {
+  font-size: 3.5rem;
+  fill: rgba(29, 161, 242, 1);
 }
 
-
 .login > .MuiFormControl-root {
-    width: 350px;
-    margin-bottom: 20px;
+  width: 350px;
+  margin-bottom: 20px;
 }
 /* .MuiOutlinedInput-root {
     margin-bottom: 25px;
 } */
 .MuiFormControl-root:focus {
-   fill: rgba(29,161,242,1.00);
+  fill: rgba(29, 161, 242, 1);
 }
 
 .login > .MuiButton-contained {
-    color: white;
-    box-shadow: rgba(29,161,242,1.00);
-    background-color: rgba(29,161,242,1.00);
-    font-weight: 800;
-    width: 350px;
-    border-radius: 50px;
-    padding: 15px;
-    margin-bottom: 20px;
+  color: white;
+  box-shadow: rgba(29, 161, 242, 1);
+  background-color: rgba(29, 161, 242, 1);
+  font-weight: 800;
+  width: 350px;
+  border-radius: 50px;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 .login > .MuiButton-contained:hover {
-    color: white;
-    box-shadow: rgba(29,161,242,1.00);
-    background-color: rgba(29,161,242,1.00);
-
+  color: white;
+  box-shadow: rgba(29, 161, 242, 1);
+  background-color: rgba(29, 161, 242, 1);
 }
 
 .login > a {
-  color: rgba(29,161,242,1.00);
+  color: rgba(29, 161, 242, 1);
   text-decoration: none;
 }
